@@ -1,59 +1,80 @@
 //node modules
 const inquirer = require('inquirer');
-const fs = require ('fs');
+const fs = require('fs');
 
-const path = require ("path");
-const outputDir = path.resolve(__dirname, "output");
-const outputPath = path.join(outputDir, "team.html");
-
-
-// html page link
-// const renderHtml = require("./assets/index.html")
+const styleCSS = require("../style.css")
+const generateHTML = require('../generateHTML.js')
 
 // //links to profiles
 const employee = require("./lib/employee");
 const manager = require("./lib/manager");
 const engineer = require("./lib/engineer");
 const intern = require("./lib/intern");
-// const { start } = require("reply");
 
-const questionsArray = [
-{
-    type: "list",
-    name: "team",
-    Message: "Please add a team member, or generate current team.",
-    choices: 
-    ["Add team member", "Generate current team"]
-},
-{
-    type: "input",
-    name: "Team Member",
-    Message: "Please choose type of team member",
-    choices:
-    ["Add Manager", "Add Engineer", "Add Employee", "Add Intern"]
-},
+const teamArray = []
 
-{
-    type: "input",
-    name: "id",
-    Message: "Please enter team member's ID."
-},
+function addTeamManager() {
+    inquirer.prompt([
+        // {
+        //     type: "list",
+        //     name: "team",
+        //     Message: "Please add new team, or generate current team.",
+        //     choices: 
+        //         ["Add Team Name", 
+        //         "Generate current team"]
+        // },
+        {
+            type: "input",
+            name: "name",
+            Message: "Please enter team manager's name",
+        },
 
-{
-    const: "input",
-    name: "email",
-    Message: "Please enter team member's email."
-},
-]
+        {
+            type: "input",
+            name: "id",
+            Message: "Please enter team manager's ID."
+        },
 
+        {
+            const: "input",
+            name: "email",
+            Message: "Please enter team manager's email."
+        },
 
-function createFile() {
-    if(!fs.existsSync(outputDir)) {
-        fs.mkdirSync(outputDir)
-    }
-    
-    fs.writeFileSync(outputPath, renderHTML(questionsArray), "UTF-8");
+        {
+            const: "input",
+            name: "officeNumber",
+            Message: "Please enter team manager's officeNumber"
+        },
+
+    ])
+     
+    .then(function (data) {
+            const teamName = data.team;
+            const name = data.name;
+            const id = data.id;
+            const email = data.email;
+            const officeNumber = data.officeNumber;
+            const teamMember = manager(teamName, name, id, email, officeNumber);
+            teamArray.push(teamMember)
+
+            addTeamMember();     
+
+        });
+        
 }
+
+
+
+
+
+// function createFile() {
+//     if(!fs.existsSync(outputDir)) {
+//         fs.mkdirSync(OUPUT_DIR)
+//     }
+
+//     fs.writeFileSync(outputPath, renderHTML(questionsArray), "UTF-8");
+// }
 
 // start();
 
@@ -86,9 +107,9 @@ function createFile() {
         //     message:"please enter team member's email"
 
         // },
-            
-    
-    
-    
+
+
+
+
 
 
