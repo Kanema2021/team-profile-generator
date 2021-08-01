@@ -1,113 +1,179 @@
 //node modules
-const inquirer = require('inquirer');
-const fs = require('fs');
-
-const styleCSS = require("../style.css")
-const generateHTML = require('../generateHTML.js')
-
-// //links to profiles
-const employee = require("./lib/employee");
-const manager = require("./lib/manager");
+const inquirer = require("inquirer");
+const fs = require("fs");
+const Manager = require("./lib/manager");
 const engineer = require("./lib/engineer");
 const intern = require("./lib/intern");
+// const generateHTML = require("./output/generateHTML.js");
 
-const teamArray = []
+const teamMembers =[];
 
-function addTeamManager() {
-    inquirer.prompt([
-        // {
-        //     type: "list",
-        //     name: "team",
-        //     Message: "Please add new team, or generate current team.",
-        //     choices: 
-        //         ["Add Team Name", 
-        //         "Generate current team"]
-        // },
-        {
-            type: "input",
-            name: "name",
-            Message: "Please enter team manager's name",
-        },
+inquirer
+    .prompt([
+    {
+        type: "input",
+        name: "managerName",
+        message: "Enter team manager name",
+    },
+    {
+        type: "input",
+        name: "managerID",
+        message: "Enter team manager ID",
+    },
+    {
+        type: "input",
+        name: "managerEmail",
+        message: "Enter team manager email",
+    },
+    {
+        type: "input",
+        name: "managerOfficeNumber",
+        message: "Enter team manager officeNumber",
+    },
 
-        {
-            type: "input",
-            name: "id",
-            Message: "Please enter team manager's ID."
-        },
+    {
+        type: "list",
+        name: "teamMembers",
+        message: "What type of team member would you like to add?",
+        choices:["Engineer", "Intern"
+        ]
+    },  
+   
+])
 
-        {
-            const: "input",
-            name: "email",
-            Message: "Please enter team manager's email."
-        },
+.then(answers => {
+    const newManager = new Manager(answers.managerName, answers.managerID, answers.managerEmail, answers.managerOfficeNumber);
+    teamMembers.push(newManager)
+   
+    if(answers.teamMembers === "Engineer")
+    {
+     addEngineer();
+    }
+    else if(answers.teamMembers === "intern")
+    {
+     addIntern();
+    }
+    else
+    {
+        generateHTML();
+    }
 
-        {
-            const: "input",
-            name: "officeNumber",
-            Message: "Please enter team manager's officeNumber"
-        },
+})
+// .catch(error => {
+//     if(error.isItyError) { 
+//     } else {
 
-    ])
-     
-    .then(function (data) {
-            const teamName = data.team;
-            const name = data.name;
-            const id = data.id;
-            const email = data.email;
-            const officeNumber = data.officeNumber;
-            const teamMember = manager(teamName, name, id, email, officeNumber);
-            teamArray.push(teamMember)
-
-            addTeamMember();     
-
-        });
-        
-}
-
-
-
-
-
-// function createFile() {
-//     if(!fs.existsSync(outputDir)) {
-//         fs.mkdirSync(OUPUT_DIR)
 //     }
+//  });
 
-//     fs.writeFileSync(outputPath, renderHTML(questionsArray), "UTF-8");
-// }
+ function addIntern() {
+    inquirer
+    .prompt([
+    {
+        type: "input",
+        name: "internName",
+        message: "Enter intern's name",
+    },
+    {
+        type: "input",
+        name: "internID",
+        message: "Enter intern's ID",
+    },
+    {
+        type: "input",
+        name: "internEmail",
+        message: "Enter intern's email",
+    },
+    {
+        type: "input",
+        name: "internSchool",
+        message: "Enter intern's school",
+    },
 
-// start();
+    {
+        type: "list",
+        name: "addTeamMember",
+        message: "What type of team member would you like to add?",
+        choices:["Engineer", "Intern", "exit"
+        ]
+    },
+    
+])
+ .then(answers => {
+    const newIntern = new Intern(answers.interName, answers.internID, answers.internEmail, answers.internSchool);
+    teamMembers.push(newIntern)
+    if (answers.addTeamMember === "intern")
+    {
+        addIntern();
+
+    }else {
+       generateHTML();            
+        }
+    })
+
+.catch(error => {
+    if(error.isItyError) { 
+    } else {
+
+    }
+ })
 
 
+ function addEngineer() {
+    inquirer
+    .prompt([
+    {
+        type: "input",
+        name: "engineerName",
+        message: "Enter intern's name",
+    },
+    {
+        type: "input",
+        name: "engineerID",
+        message: "Enter intern's ID",
+    },
+    {
+        type: "input",
+        name: "engineerEmail",
+        message: "Enter Engineer's email",
+    },
+    {
+        type: "input",
+        name: "engineerGithub",
+        message: "Enter Enginneer's github",
+    },
 
-// start();
+    {
+        type: "list",
+        name: "addTeamMember",
+        message: "What type of team member would you like to add?",
+        choices:["Engineer", "Intern", "exit"
+        ]
+    },
+    
+])
+ .then(answers => {
+    const newEngineer = new Engineer(answers.engineerName, answers.engineerID, answers.engineerEmail, answers.engineerGithub);
+    teamMembers.push(newEngineer)
+    if (answers.addTeamMember === "Engineer")
+    {
+        addEngineer();
+    }else {
+       generateHTML();            
+        }
+    })
 
+.catch(error => {
+    if(error.isItyError) { 
+    } else {
 
+    }
+ });
+}
+function generateHTML() {
+    fs.writeFileSync(generateHTML,"");
 
-
-
-
-
-
-
-// return inquirer.prompt([
-        // const questionOne {
-        //     type: "input",
-        //     name:"name",
-        //     message: "Please enter team member's name.",
-        // },
-        // {
-        //     type: "input",
-        //     name: "id",
-        //     message: "please enter team member's id",        
-        // },
-        // {
-        //     type: "input",
-        //     name: "email",
-        //     message:"please enter team member's email"
-
-        // },
-
+}}
 
 
 
