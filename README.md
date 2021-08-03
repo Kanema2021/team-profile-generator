@@ -10,7 +10,7 @@
 ![Team-profile-generated-html](https://user-images.githubusercontent.com/82725636/127967540-876a7e2d-db22-4db6-b613-ceb9ad0d7688.png)
 
 <img width="394" alt="Screen Shot 2021-07-31 at 5 16 38 PM" src="https://user-images.githubusercontent.com/82725636/127967440-bd242aba-8653-4e85-b06b-eef564dca81c.png">
-![Team-profile-generated-html](https://user-images.githubusercontent.com/82725636/127967425-3e4eb121-ff17-4363-ba2e-2cf4bd382951.png)
+https://user-images.githubusercontent.com/82725636/127967719-b965d03c-a0e9-4422-9ede-f72a4b60c322.mov
 
 ## User Story
 ```md
