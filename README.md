@@ -5,7 +5,7 @@
 
 <img width="394" alt="Screen Shot 2021-07-31 at 5 16 38 PM" src="https://user-images.githubusercontent.com/82725636/127967440-bd242aba-8653-4e85-b06b-eef564dca81c.png">
 
-
+https://user-images.githubusercontent.com/82725636/127968005-957ea46a-e53b-420c-85aa-2ce05d24620f.mov
 
 ## User Story
 ```md
