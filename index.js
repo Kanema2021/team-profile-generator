@@ -39,9 +39,9 @@ const managerQuestions = () => {
         });
 }
 
-const teamQuestion = () => {
-    return inquirer
-        .prompt([
+        const teamQuestion = () => {
+        return inquirer
+            .prompt([
             {
                 type: "list",
                 name: "teamMembers",
@@ -56,13 +56,13 @@ const teamQuestion = () => {
             const { teamMembers } = teamData;
             switch(teamMembers){
                 case 'Engineer':
-                    engineerQuestions();
+                engineerQuestions();
                     break;
                 case 'Intern':
-                    internQuestions();
+                internQuestions();
                     break;
                 case 'Exit':
-                    createWriteHtml();
+                createWriteHtml();
                     break;
                 default:
                     createWriteHtml();
@@ -125,12 +125,12 @@ const internQuestions = () => {
                 name: "internSchool",
                 message: "Enter intern's school",
             }
-        ]).then(internData => {
-            const { internName, internID, internEmail, internSchool } = internData;
-            const newIntern = new Intern(internName, internID, internEmail, internSchool);
-            teamMembers.push(newIntern);
-            teamQuestion();
-        });
+    ]).then(internData => {
+         const { internName, internID, internEmail, internSchool } = internData;
+         const newIntern = new Intern(internName, internID, internEmail, internSchool);
+        teamMembers.push(newIntern);
+         teamQuestion();
+     });
 }
 
 const createWriteHtml = () => {
