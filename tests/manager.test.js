@@ -23,7 +23,7 @@ test("Can set email via constructor argument", () => {
   expect(result.email).toEqual(testVal);
 });
 test("Can set officeNumber via constructor argument", () => {
-    const testVal = "25";
+    const testVal = 100;
     const result = new Employee("Foo", 1, testVal);
     expect(result.email).toEqual(testVal);
   });
